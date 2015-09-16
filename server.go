@@ -1,9 +1,17 @@
 package main
 
 import (
-	"fmt"
+	"github.com/brettman/RestServer"
+	"github.com/brettman/asyncweb/handlers"
+	"log"
+	"net/http"
 )
 
+var routes = []server.Route{
+	{"Hello", "POST", "/hello", handlers.HelloWorld},
+}
+
 func main() {
-	fmt.Println("hello world")
+	router := server.NewRouter(routes)
+	log.Fatal(http.ListenAndServe(":8080", router))
 }
